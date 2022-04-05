@@ -1,0 +1,3 @@
+(library
+ (public_name eventstore_client)
+ (name eventstore_client))
