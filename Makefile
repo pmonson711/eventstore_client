@@ -1,3 +1,9 @@
+EVENTSTORE_TAG=oss-v21.10.2
+PROTO_SOURCE=https://raw.githubusercontent.com/EventStore/EventStore/$(EVENTSTORE_TAG)/src/Protos/Grpc/
+PROTO_DEST=./types/proto/
+CURL=curl
+CURL_ARGS=-L
+
 .PHONY: build
 build:
 	dune build @all -j8
@@ -34,6 +40,21 @@ coverage:
 	dune runtest --instrument-with bisect_ppx --force
 	bisect-ppx-report summary --per-file
 	bisect-ppx-report html
+
+.PHONY: fetch_proto
+fetch_proto:
+	$(CURL) $(CURL_ARGS) $(PROTO_SOURCE)cluster.proto --output $(PROTO_DEST)cluster.proto
+	$(CURL) $(CURL_ARGS) $(PROTO_SOURCE)code.proto --output $(PROTO_DEST)code.proto
+	$(CURL) $(CURL_ARGS) $(PROTO_SOURCE)gossip.proto --output $(PROTO_DEST)gossip.proto
+	$(CURL) $(CURL_ARGS) $(PROTO_SOURCE)monitoring.proto --output $(PROTO_DEST)monitoring.proto
+	$(CURL) $(CURL_ARGS) $(PROTO_SOURCE)operations.proto --output $(PROTO_DEST)operations.proto
+	$(CURL) $(CURL_ARGS) $(PROTO_SOURCE)persistent.proto --output $(PROTO_DEST)persistent.proto
+	$(CURL) $(CURL_ARGS) $(PROTO_SOURCE)projections.proto --output $(PROTO_DEST)projections.proto
+	$(CURL) $(CURL_ARGS) $(PROTO_SOURCE)serverfeatures.proto --output $(PROTO_DEST)serverfeatures.proto
+	$(CURL) $(CURL_ARGS) $(PROTO_SOURCE)shared.proto --output $(PROTO_DEST)shared.proto
+	$(CURL) $(CURL_ARGS) $(PROTO_SOURCE)status.proto --output $(PROTO_DEST)status.proto
+	$(CURL) $(CURL_ARGS) $(PROTO_SOURCE)streams.proto --output $(PROTO_DEST)streams.proto
+	$(CURL) $(CURL_ARGS) $(PROTO_SOURCE)users.proto --output $(PROTO_DEST)users.proto
 
 .PHONY: format
 format:

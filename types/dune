@@ -1,0 +1,210 @@
+(library
+ (name eventstore_client_types)
+ (public_name eventstore_client.types)
+ (libraries ocaml-protoc-plugin ocaml-protoc-plugin.google_types)
+ (preprocess
+  (pps ppx_deriving.show ppx_deriving.eq)))
+
+(rule
+ (targets google_include)
+ (action
+  (with-stdout-to
+   %{targets}
+   (system "pkg-config protobuf --variable=includedir"))))
+
+(rule
+ (deps
+  (package ocaml-protoc-plugin))
+ (targets any.ml empty.ml struct.ml timestamp.ml)
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   "--ocaml_out=annot=[@@deriving show { with_path = false }, eq]:."
+   %{read-lines:google_include}/google/protobuf/any.proto
+   %{read-lines:google_include}/google/protobuf/empty.proto
+   %{read-lines:google_include}/google/protobuf/struct.proto
+   %{read-lines:google_include}/google/protobuf/timestamp.proto
+   )))
+
+(rule
+ (targets shared.ml)
+ (deps
+  (:proto proto/shared.proto)
+  )
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   -I
+   ./proto/
+   "--ocaml_opt=annot=[@@deriving show { with_path = false }, eq]"
+   --ocaml_out=.
+   %{proto})))
+
+(rule
+ (targets cluster.ml)
+ (deps
+  (:proto proto/cluster.proto))
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   -I
+   ./proto/
+   "--ocaml_opt=annot=[@@deriving show { with_path = false }, eq]"
+   --ocaml_out=.
+   %{proto})))
+
+(rule
+ (targets code.ml)
+ (deps
+  (:proto proto/code.proto))
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   -I
+   ./proto/
+   "--ocaml_opt=annot=[@@deriving show { with_path = false }, eq]"
+   --ocaml_out=.
+   %{proto})))
+
+(rule
+ (targets gossip.ml)
+ (deps
+  (:proto proto/gossip.proto))
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   -I
+   ./proto/
+   "--ocaml_opt=annot=[@@deriving show { with_path = false }, eq]"
+   --ocaml_out=.
+   %{proto})))
+
+(rule
+ (targets monitoring.ml)
+ (deps
+  (:proto proto/monitoring.proto))
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   -I
+   ./proto/
+   "--ocaml_opt=annot=[@@deriving show { with_path = false }, eq]"
+   --ocaml_out=.
+   %{proto})))
+
+(rule
+ (targets operations.ml)
+ (deps
+  (:proto proto/operations.proto))
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   -I
+   ./proto/
+   "--ocaml_opt=annot=[@@deriving show { with_path = false }, eq]"
+   --ocaml_out=.
+   %{proto})))
+
+(rule
+ (targets persistent.ml)
+ (deps
+  (:proto proto/persistent.proto))
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   -I
+   ./proto/
+   "--ocaml_opt=annot=[@@deriving show { with_path = false }, eq]"
+   --ocaml_out=.
+   %{proto})))
+
+(rule
+ (targets projections.ml)
+ (deps
+  (:proto proto/projections.proto))
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   -I
+   ./proto/
+   "--ocaml_opt=annot=[@@deriving show { with_path = false }, eq]"
+   --ocaml_out=.
+   %{proto})))
+
+(rule
+ (targets serverfeatures.ml)
+ (deps
+  (:proto proto/serverfeatures.proto))
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   -I
+   ./proto/
+   "--ocaml_opt=annot=[@@deriving show { with_path = false }, eq]"
+   --ocaml_out=.
+   %{proto})))
+
+(rule
+ (targets status.ml)
+ (deps
+  (:proto proto/status.proto))
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   -I
+   ./proto/
+   "--ocaml_opt=annot=[@@deriving show { with_path = false }, eq]"
+   --ocaml_out=.
+   %{proto})))
+
+(rule
+ (targets streams.ml)
+ (deps
+  (:proto proto/streams.proto))
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   -I
+   ./proto/
+   "--ocaml_opt=annot=[@@deriving show { with_path = false }, eq]"
+   --ocaml_out=.
+   %{proto})))
+
+(rule
+ (targets users.ml)
+ (deps
+  (:proto proto/users.proto))
+ (action
+  (run
+   protoc
+   -I
+   %{read-lines:google_include}
+   -I
+   ./proto/
+   "--ocaml_opt=annot=[@@deriving show { with_path = false }, eq]"
+   --ocaml_out=.
+   %{proto})))

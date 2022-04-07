@@ -3,15 +3,16 @@
 (name eventstore_client)
 
 (generate_opam_files true)
+(version unreleased)
 
-; (source
-; (github username/reponame))
+(source
+  (github pmonson711/eventstore_client))
 
 (authors "Paul Monson")
 
 (maintainers "Paul Monson")
 
-; (license LICENSE)
+(license MIT)
 
 ; (documentation https://url/to/documentation)
 
@@ -22,9 +23,10 @@
  (depends
    (ocaml (>= 4.08))
    (dune (>= 2.0))
+   (h2 (>= 0.8.0))
+   (ocaml-protoc-plugin (>= 4.2.0))
    (uri (>= 4.2.0))
-   (ocaml-protoc (>= 2.1))
-   (h2 (>= 0.8.0)))
+   (ppx_deriving (>= 5.2.1)))
  (tags
   (topics "to describe" your project)))
 
