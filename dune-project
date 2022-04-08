@@ -23,10 +23,16 @@
  (depends
    (ocaml (>= 4.08))
    (dune (>= 2.0))
+   ;; http2
    (h2 (>= 0.8.0))
-   (ocaml-protoc-plugin (>= 4.2.0))
    (uri (>= 4.2.0))
-   (ppx_deriving (>= 5.2.1)))
+   ;; Protobuff types
+   (ocaml-protoc-plugin (>= 4.2.0))
+   ;; Derivings
+   (ppx_deriving (>= 5.2.1))
+   ;; Testing
+   (alcotest (and :with-test (>= 1.5.0)))
+ )
  (tags
   (topics "to describe" your project)))
 

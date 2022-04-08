@@ -1,0 +1,5 @@
+(test
+ (name types_test)
+ (libraries alcotest eventstore_client.types)
+ (action
+  (run %{test} --show-errors)))

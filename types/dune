@@ -25,14 +25,12 @@
    %{read-lines:google_include}/google/protobuf/any.proto
    %{read-lines:google_include}/google/protobuf/empty.proto
    %{read-lines:google_include}/google/protobuf/struct.proto
-   %{read-lines:google_include}/google/protobuf/timestamp.proto
-   )))
+   %{read-lines:google_include}/google/protobuf/timestamp.proto)))
 
 (rule
  (targets shared.ml)
  (deps
-  (:proto proto/shared.proto)
-  )
+  (:proto proto/shared.proto))
  (action
   (run
    protoc
