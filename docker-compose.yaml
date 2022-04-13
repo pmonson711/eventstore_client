@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  volumes-provisioner:
+    image: hasnat/volumes-provisioner
+    environment:
+      PROVISION_DIRECTORIES: "1000:1000:0755:/tmp/certs"
+    volumes:
+      - ./certs:/tmp/certs
+    network_mode: none
+
+  cert-gen:
+    image: eventstore/es-gencert-cli:1.0.2
+    entrypoint: bash
+    user: "1000:1000"
+    command: >
+      -c "mkdir -p ./certs && cd /certs
+      && es-gencert-cli create-ca
+      && es-gencert-cli create-node -out ./node1 -ip-addresses 127.0.0.1,172.30.240.11 -dns-names localhost
+      && find . -type f -print0 | xargs -0 chmod 666
+      && ls -al ca/
+      && ls -al node1/"
+    volumes:
+      - ./certs:/certs
+    depends_on:
+      - volumes-provisioner
+
+  eventstore:
+    image: pmonson711/eventstore-inttest:latest
+    ports:
+      - 1113:1113/tcp
+      - 1114:1114/tcp
+      - 2113:2113/tcp
+      - 2114:2114/tcp
+    healthcheck:
+      interval: 1s
+      timeout: 1s
+      retries: 10
+    volumes:
+      - ./certs:/etc/eventstore/certs
+    environment:
+      EVENTSTORE_TRUSTED_ROOT_CERTIFICATES_PATH: /etc/eventstore/certs/ca
+      EVENTSTORE_CERTIFICATE_FILE: /etc/eventstore/certs/node1/node.crt
+      EVENTSTORE_CERTIFICATE_PRIVATE_KEY_FILE: /etc/eventstore/certs/node1/node.key
+      EVENTSTORE_DB: /data/integration-tests
+      EVENTSTORE_CERTIFICATE_PASSWORD: changeit
+    depends_on:
+      - cert-gen

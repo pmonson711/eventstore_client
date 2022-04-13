@@ -1,0 +1,11 @@
+(library
+ (name eventstore_http)
+ (public_name eventstore_client.http)
+ (libraries
+  eventstore_client.types
+  eventstore_client.config
+  piaf
+  yojson
+  ppx_deriving_yojson.runtime)
+ (preprocess
+  (pps ppx_deriving_yojson ppx_deriving.show)))

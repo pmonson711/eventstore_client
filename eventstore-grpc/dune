@@ -1,0 +1,4 @@
+(library
+ (name eventstore_grpc)
+ (public_name eventstore_client.grpc)
+ (libraries eventstore_client.types eventstore_client.config piaf))

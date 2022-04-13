@@ -1,5 +1,5 @@
 (library
- (name eventstore_client_types)
+ (name eventstore_types)
  (public_name eventstore_client.types)
  (libraries ocaml-protoc-plugin ocaml-protoc-plugin.google_types)
  (preprocess

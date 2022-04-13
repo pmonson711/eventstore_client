@@ -1,0 +1,4 @@
+(library
+ (name eventstore_config)
+ (public_name eventstore_client.config)
+ (libraries piaf))

@@ -24,12 +24,13 @@
    (ocaml (>= 4.08))
    (dune (>= 2.0))
    ;; http2
-   (h2 (>= 0.8.0))
-   (uri (>= 4.2.0))
+   (piaf (>= 0.1.0))
+   ;; json
    ;; Protobuff types
    (ocaml-protoc-plugin (>= 4.2.0))
    ;; Derivings
    (ppx_deriving (>= 5.2.1))
+   (ppx_deriving_yojson (>= 3.6.1))
    ;; Testing
    (alcotest (and :with-test (>= 1.5.0)))
  )
