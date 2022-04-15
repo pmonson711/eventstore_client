@@ -1,8 +1,9 @@
 let get_body (config : Eventstore_config.t) =
   let open Piaf in
   let open Lwt_result.Syntax in
+  let headers = [ ("Accept", "application/json; charset=utf-8") ] in
   let* response =
-    Client.Oneshot.get ~config:config.http_config config.server_uri
+    Client.Oneshot.get ~config:config.http_config ~headers config.server_uri
   in
   let+ body =
     if Status.is_successful response.status then Body.to_string response.body

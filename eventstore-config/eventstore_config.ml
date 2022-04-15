@@ -33,3 +33,5 @@ let with_connect_timeout timeout config =
     { config.http_config with connect_timeout= timeout }
   in
   { config with http_config= updated_http_config }
+
+module Logger = Setup_logs
