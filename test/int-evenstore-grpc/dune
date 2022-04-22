@@ -1,0 +1,3 @@
+(executable
+ (name int_eventstore_grpc_test)
+ (libraries alcotest alcotest-lwt eventstore_grpc))

@@ -16,6 +16,7 @@ type grpc_code =
   | Unavailable
   | Data_loss
   | Unauthenticated
+[@@deriving show]
 
 let int_of_code = function
   | OK -> 0
@@ -60,7 +61,11 @@ type t =
   { code: grpc_code
   ; message: string option
   }
+[@@deriving show]
 
-let v ?message code = { code; message }
+let code_of_string s =
+  match int_of_string_opt s with Some i -> code_of_int i | None -> None
+
+let make ?message code = { code; message }
 let code t = t.code
 let message t = Option.map (fun message -> Uri.pct_encode message) t.message

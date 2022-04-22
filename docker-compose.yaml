@@ -16,7 +16,7 @@ services:
     command: >
       -c "mkdir -p ./certs && cd /certs
       && es-gencert-cli create-ca
-      && es-gencert-cli create-node -out ./node1 -ip-addresses 127.0.0.1,172.30.240.11 -dns-names localhost
+      && es-gencert-cli create-node -out ./node1 -ip-addresses 127.0.0.1,10.0.0.2 -dns-names localhost
       && find . -type f -print0 | xargs -0 chmod 666
       && ls -al ca/
       && ls -al node1/"
@@ -44,5 +44,10 @@ services:
       EVENTSTORE_CERTIFICATE_PRIVATE_KEY_FILE: /etc/eventstore/certs/node1/node.key
       EVENTSTORE_DB: /data/integration-tests
       EVENTSTORE_CERTIFICATE_PASSWORD: changeit
+      EVENTSTORE_CLUSTER_SIZE: 1
+      EVENTSTORE_RUN_PROJECTIONS: All
+      EVENTSTORE_START_STANDARD_PROJECTIONS: 'true'
+      EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP: 'true'
+      EVENTSTORE_INSECURE: 'true'
     depends_on:
       - cert-gen

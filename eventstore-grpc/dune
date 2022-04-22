@@ -1,4 +1,6 @@
 (library
  (name eventstore_grpc)
  (public_name eventstore_client.grpc)
- (libraries eventstore_client.types eventstore_client.config piaf))
+ (libraries eventstore_client.types eventstore_client.config piaf)
+ (preprocess
+  (pps ppx_deriving.show ppx_deriving.eq)))

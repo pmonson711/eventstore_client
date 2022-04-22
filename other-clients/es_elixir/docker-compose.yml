@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  eventstoredb:
+    image: eventstore/eventstore:latest
+    ports:
+      - 2113:2113
+    command: --insecure --run-projections=All
+
+  elixir:
+    image: elixir:1.13.1
+    depends_on:
+      - eventstoredb
+    volumes:
+      - ./:/app
+    command: tail -f /dev/null

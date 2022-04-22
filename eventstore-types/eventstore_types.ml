@@ -11,4 +11,4 @@ module Operations = Srv_operations
 module PersistentSubscriptions = Srv_persistent_subscriptions
 module Projections = Srv_projections
 module Streams = Srv_streams
-module User = Srv_user
+module Users = Srv_users

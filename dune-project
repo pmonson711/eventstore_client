@@ -34,6 +34,7 @@
    (ppx_deriving_yojson (>= 3.6.1))
    ;; Testing
    (alcotest (and :with-test (>= 1.5.0)))
+   (alcotest-lwt (and :with-test (>= 1.5.0)))
  )
  (tags
   (topics "to describe" your project)))

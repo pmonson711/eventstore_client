@@ -1,1 +1,2 @@
-module Users = Eventstore_types.User
+module Users = Eventstore_types.Users
+module Req = Req
